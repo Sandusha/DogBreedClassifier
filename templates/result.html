@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            text-align: center;
+            padding: 20px;
+            background-image: url('{{ url_for('static', filename='bG.png') }}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center; 
+        }
+
+        .result-box {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            margin: 10px 0;
+            color: #555;
+        }
+
+        .result-image {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+            border-radius: 10px; /* Optional: Add rounded corners */
+        }
+
+        .goback-btn {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .goback-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="result-box">
+        <h2>Prediction Result</h2>
+        {% if predicted_breed != "Not a dog" %}
+            <p>The Predicted Dog Breed is: {{ predicted_breed }}</p>
+            <p>Prediction Confidence: {{ prediction_confidence }}%</p>
+        {% else %}
+            <p>Not a dog. Please only upload dog images for classification.</p>
+        {% endif %}
+        <img class="result-image" src="{{ url_for('static', filename='uploads/temp_image.jpg') }}" alt="Uploaded Image">
+        <br>
+        <a class="goback-btn" href="{{ url_for('index') }}">Go back</a>
+    </div>
+</body>
+</html>
